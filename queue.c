@@ -99,6 +99,8 @@ void q_swap(struct list_head *head)
 /* Reverse elements in queue */
 void q_reverse(struct list_head *head)
 {
+    if (!head || list_empty(head))
+        return;
     struct list_head *temp = NULL;
     struct list_head *current = head;
     do {
