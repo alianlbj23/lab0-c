@@ -101,14 +101,13 @@ void q_reverse(struct list_head *head)
 {
     if (!head || list_empty(head))
         return;
-    struct list_head *temp = NULL;
-    struct list_head *current = head;
-    do {
-        temp = current->next;
+    struct list_head *current = head, *next = NULL;
+    while (next != head) {
+        next = current->next;
         current->next = current->prev;
-        current->prev = temp;
-        current = temp;
-    } while (current != head);
+        current->prev = next;
+        current = next;
+    }
 }
 
 /* Reverse the nodes of the list k at a time */
