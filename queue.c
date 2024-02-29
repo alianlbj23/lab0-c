@@ -96,16 +96,10 @@ void q_swap(struct list_head *head)
     if (!head || list_empty(head) || list_is_singular(head)) {
         return;
     }
-    struct list_head *current = head->next, *next = current->next;
-    while (current != head && next != head) {
-        current->prev->next = next;
-        next->prev = current->prev;
-        current->next = next->next;
-        next->next->prev = current;
-        current->prev = next;
-        next->next = current;
+    struct list_head *current = head->next;
+    while (current != head && current->next != head) {
+        list_move(current, current->next);
         current = current->next;
-        next = current->next;
     }
     // https://leetcode.com/problems/swap-nodes-in-pairs/
 }
